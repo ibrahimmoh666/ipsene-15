@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javafx-sdk-16">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../javafx/openjfx-16_windows-x64_bin-sdk.zip!/javafx-sdk-16" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
