@@ -11,9 +11,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SceneController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    private static Stage stage;
+    private static Scene scene;
+    private static Parent root;
 
     @FXML
     public void switchScene(ActionEvent event, String fxmlFile) {
@@ -37,5 +37,15 @@ public class SceneController {
     @FXML
     public void showJoinMenu(ActionEvent event) {
         switchScene(event, "JoinScene");
+    }
+
+    @FXML
+    public void showCreateMenu(ActionEvent event) {
+        switchScene(event, "CreateScene");
+    }
+
+    @FXML
+    public void showGameMenu(ActionEvent event) {
+        switchScene(event, "GameMenu");
     }
 }
