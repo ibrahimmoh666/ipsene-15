@@ -1,17 +1,21 @@
 package services;
 
 import com.google.api.core.ApiFuture;
+import com.google.api.core.SettableApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.EventListener;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firebase.database.annotations.Nullable;
 import models.Speler;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 public class firebaseService {
@@ -86,9 +90,10 @@ public class firebaseService {
         ApiFuture<Void> futureTransaction = db.runTransaction(transaction -> {
             DocumentReference docRef = db.collection("spel").document("spelers");
             DocumentSnapshot snapshot = transaction.get(docRef).get();
+
             long oldValue = snapshot.getLong("money");
             transaction.update(docRef, "money", oldValue += amount);
-            System.out.println("Managed "+ amount +"$ from '"+ name +"' wallet");
+            System.out.println("Exchanged "+ amount +"$ from '"+ name +"' wallet");
             return null;
         });
     }
