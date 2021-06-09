@@ -1,0 +1,24 @@
+/* Global */
+* {
+    -fx-font-family: Corbel, Arial, sans-serif;
+}
+
+/* Main menu */
+.main-background {
+    -fx-background-image: url("../main/resources/background.png");
+}
+
+.menu-btn {
+    -fx-min-width: 300px;
+    -fx-text-fill: black;
+    -fx-background-color: #FFF8E1;
+    -fx-border-radius: 4;
+    -fx-cursor: hand;
+    -fx-font-size: 200%;
+}
+
+.menu-btn:hover {
+    -fx-background-color: #BFB9A4;
+}
+
+/* Game */
