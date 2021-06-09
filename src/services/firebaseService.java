@@ -1,21 +1,17 @@
 package services;
 
 import com.google.api.core.ApiFuture;
-import com.google.api.core.SettableApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.EventListener;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import com.google.firebase.database.annotations.Nullable;
 import models.Speler;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 
 public class firebaseService {
@@ -44,26 +40,31 @@ public class firebaseService {
      * @throws Exception
      */
     public void addUser(String name, String token) throws Exception {
-        DocumentReference docRef = db.collection("spel").document("spelers");
+        DocumentReference docRef = db.collection("spelers").document(name);
         Map<String, Object> data = new HashMap<>();
-        data.put("naam,", name);
-        data.put("pion_kleur", "kleur");
+        data.put("name,", name);
+        data.put("color", "kleur");
         data.put("money", 1500);
-        data.put("token", "tokenString");
+        data.put("position", 0);
         ApiFuture<WriteResult> result = docRef.set(data);
         System.out.println("Added user to game : " + result.get().getUpdateTime());
     }
 
     /**
      * Get the users information
-     * @param name                  Player name
      * @throws Exception
      * @return Speler class obj     Speler informatie als een speler object class
      */
-    public void getUser(String name) throws Exception{
-        Speler speler = new Speler("", 0, 39000);
-        ApiFuture<WriteResult> future = db.collection("cities").document("LA").set(speler);
-        System.out.println("Update time : " + future.get().getUpdateTime());
+    public ArrayList<Speler> getUsers() throws Exception{
+        ApiFuture<QuerySnapshot> future =
+                db.collection("spelers").get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        ArrayList<Speler> spelers = new ArrayList<Speler>();
+        for (DocumentSnapshot document : documents) {
+//            System.out.println(document.getId() + " => " + document.toObject(Speler.class));
+            spelers.add(document.toObject(Speler.class));
+        }
+        return spelers;
     }
 
     /**
