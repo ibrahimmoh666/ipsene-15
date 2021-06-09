@@ -1,0 +1,66 @@
+/* Global */
+* {
+    -fx-font-family: Corbel, Arial, sans-serif;
+}
+
+.back-btn {
+    -fx-min-width: 140px;
+    -fx-min-height: 50px;
+    -fx-text-fill: black;
+    -fx-background-color: #FFF8E1;
+    -fx-border-radius: 4;
+    -fx-cursor: hand;
+    -fx-font-size: 110%;
+    -fx-font-weight: bold;
+}
+
+.back-btn:hover {
+    -fx-background-color: #BFB9A4;
+}
+
+/* Main menu */
+.main-background {
+    -fx-background-image: url("../main/resources/background.png");
+}
+
+.menu-btn {
+    -fx-min-width: 300px;
+    -fx-text-fill: black;
+    -fx-background-color: #FFF8E1;
+    -fx-border-radius: 4;
+    -fx-cursor: hand;
+    -fx-font-size: 200%;
+    -fx-font-weight: bold;
+}
+
+.menu-btn:hover {
+    -fx-background-color: #BFB9A4;
+}
+
+/* Rules */
+.rules-background {
+    -fx-background-image: url("../main/resources/rules_background.png");
+    -fx-background-size: stretch;
+}
+
+.rule-section {
+    -fx-font-size: 200%;
+    -fx-font-weight: bold;
+}
+
+.rule-text {
+    -fx-font-size: 120%;
+}
+
+/* Join */
+.join-background {
+    -fx-background-image: url("../main/resources/join_background.png");
+    -fx-background-size: stretch;
+}
+
+.token-input {
+    -fx-font-weight: bold;
+    -fx-font-size: 36px;
+}
+
+/* Game */

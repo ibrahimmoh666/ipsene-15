@@ -11,41 +11,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SceneController {
-    private static Stage stage;
-    private static Scene scene;
-    private static Parent root;
+    private Stage window;
+    private Scene scene;
+    private Parent root;
 
-    @FXML
     public void switchScene(ActionEvent event, String fxmlFile) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../scenes/" + fxmlFile + ".fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
+            scene.getStylesheets().add(getClass().getResource("../scenes/application.css").toExternalForm());
+            window.setScene(scene);
+            window.setResizable(false);
+            window.show();
         } catch (IOException IOEx) {
             IOEx.printStackTrace();
         }
-    }
-
-    @FXML
-    public void showMainMenu(ActionEvent event) {
-        switchScene(event, "MainScene");
-    }
-
-    @FXML
-    public void showJoinMenu(ActionEvent event) {
-        switchScene(event, "JoinScene");
-    }
-
-    @FXML
-    public void showCreateMenu(ActionEvent event) {
-        switchScene(event, "CreateScene");
-    }
-
-    @FXML
-    public void showGameMenu(ActionEvent event) {
-        switchScene(event, "GameMenu");
     }
 }
