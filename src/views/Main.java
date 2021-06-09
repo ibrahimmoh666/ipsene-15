@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import services.firebaseService;
 
 public class Main extends Application {
     @Override
@@ -17,8 +18,11 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1400, 800));
         primaryStage.setResizable(false);
         primaryStage.show();
-    }
 
+        firebaseService fs = new firebaseService();
+        fs.addUser("this is a test", "token");
+        fs.manageUserFunds("Bob", -500);
+    }
 
     public static void main(String[] args) {
         launch(args);

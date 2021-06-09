@@ -24,6 +24,11 @@
         <artifactId>firebase-admin</artifactId>
         <version>7.3.0</version>
     </dependency>
+        <dependency>
+            <groupId>com.google.api</groupId>
+            <artifactId>api-common</artifactId>
+            <version>1.9.2</version>
+        </dependency>
     </dependencies>
 
     <build>
