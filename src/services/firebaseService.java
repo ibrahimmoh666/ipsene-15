@@ -50,8 +50,13 @@ public class firebaseService {
         System.out.println("Added user to game : " + result.get().getUpdateTime());
     }
 
+    /**
+     * Get the users information
+     * @param name                  Player name
+     * @throws Exception
+     * @return Speler class obj     Speler informatie als een speler object class
+     */
     public void getUser(String name) throws Exception{
-        ArrayList<String> klueren = new ArrayList<String>(Arrays.asList("geel", "blauw", "rood", "paars"));
         Speler speler = new Speler("", 0, 39000);
         ApiFuture<WriteResult> future = db.collection("cities").document("LA").set(speler);
         System.out.println("Update time : " + future.get().getUpdateTime());

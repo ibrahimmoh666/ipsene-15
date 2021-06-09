@@ -20,7 +20,7 @@ public class Main extends Application {
         primaryStage.show();
 
         firebaseService fs = new firebaseService();
-        fs.addUser("this is a test", "token");
+        fs.addUser("Bob", "token");
         fs.manageUserFunds("Bob", -500);
     }
 
