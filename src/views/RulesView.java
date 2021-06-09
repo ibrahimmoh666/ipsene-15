@@ -4,7 +4,7 @@ import controllers.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class GameView {
+public class RulesView {
     private SceneController sceneController = new SceneController();
 
     @FXML

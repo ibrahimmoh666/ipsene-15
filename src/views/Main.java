@@ -26,8 +26,24 @@ public class Main extends Application {
     }
 
     @FXML
+    public void goToCreateRoom(ActionEvent event) {
+        System.out.println("Create scene has yet to be made");
+        /*sceneController.switchScene(event, "CreateScene");*/
+    }
+
+    @FXML
     public void goToJoinRoom(ActionEvent event) {
         sceneController.switchScene(event, "JoinScene");
+    }
+
+    @FXML
+    public void goToGameRules(ActionEvent event) {
+        sceneController.switchScene(event, "RulesScene");
+    }
+
+    @FXML
+    public void goToGame(ActionEvent event) {
+        sceneController.switchScene(event, "GameScene");
     }
 
     @FXML

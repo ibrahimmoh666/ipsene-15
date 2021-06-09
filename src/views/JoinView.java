@@ -11,4 +11,9 @@ public class JoinView {
     public void goToMainMenu(ActionEvent event) {
         sceneController.switchScene(event, "MainScene");
     }
+
+    @FXML
+    public void onEnter(ActionEvent event) {
+        System.out.println("Token entered");
+    }
 }
