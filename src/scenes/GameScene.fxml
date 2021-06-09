@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameView">
    <children>
@@ -13,5 +14,9 @@
          </image>
       </ImageView>
       <Button layoutX="1326.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainMenu" text="Go back" />
+      <Circle id="player0" fill="DODGERBLUE" layoutX="38.0" layoutY="719.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="player1" fill="#ff1f1f" layoutX="76.0" layoutY="719.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="player2" fill="#07ff49" layoutX="38.0" layoutY="762.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="player3" fill="#ff00c8" layoutX="76.0" layoutY="762.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
