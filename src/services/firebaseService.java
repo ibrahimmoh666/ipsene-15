@@ -17,6 +17,7 @@ import java.util.*;
 public class firebaseService {
 
     private Firestore db;
+    private static int playerCount = 0;
 
     public firebaseService() throws IOException {
         FileInputStream serviceAccount =
@@ -42,16 +43,18 @@ public class firebaseService {
     public void addUser(String name, String token) throws Exception {
         DocumentReference docRef = db.collection("spelers").document(name);
         Map<String, Object> data = new HashMap<>();
-        data.put("name,", name);
+        data.put("name", name);
         data.put("color", "kleur");
         data.put("money", 1500);
         data.put("position", 0);
+        data.put("number", playerCount);
         ApiFuture<WriteResult> result = docRef.set(data);
         System.out.println("Added user to game : " + result.get().getUpdateTime());
+        playerCount++;
     }
 
     /**
-     * Get the users information
+     * Get the users information in an arraylist
      * @throws Exception
      * @return Speler class obj     Speler informatie als een speler object class
      */
@@ -61,8 +64,10 @@ public class firebaseService {
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         ArrayList<Speler> spelers = new ArrayList<Speler>();
         for (DocumentSnapshot document : documents) {
-//            System.out.println(document.getId() + " => " + document.toObject(Speler.class));
-            spelers.add(document.toObject(Speler.class));
+            System.out.println(document);
+            if(document.exists()){
+                spelers.add(document.toObject(Speler.class));
+            }
         }
         return spelers;
     }

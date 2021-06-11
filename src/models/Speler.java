@@ -6,12 +6,14 @@ public class Speler {
     private String color;
     private int position;
     private int money;
+    private int number;
 
-    public Speler(String name, String color, int position, int money) {
+    public Speler(String name, String color, int position, int money, int number) {
         this.name = name;
         this.color = color;
         this.position = position;
         this.money = money;
+        this.number = number;
     }
 
     public Speler() {
@@ -47,6 +49,14 @@ public class Speler {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }
 

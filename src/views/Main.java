@@ -1,6 +1,7 @@
 package views;
 
 import controllers.SceneController;
+import controllers.gameController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
