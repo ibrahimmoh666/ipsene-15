@@ -1,45 +1,58 @@
+/* Fonts */
+@font-face {
+    src: url("../main/resources/fonts/BerkshireSwash-Regular.ttf") format("truetype");
+}
+
 /* Global */
 * {
-    -fx-font-family: Corbel, Arial, sans-serif;
+    -fx-primaryBgColor: #FFF8E1;
+    -fx-secondaryBgColor: #EFDEC6;
+    -fx-primaryBorderColor: #DACBA8;
+    -fx-primaryHoverColor: #C6B8A5;
+    -fx-font-family: "Berkshire Swash", Corbel, sans-serif;
+}
+
+.menu-btn, .back-btn {
+    -fx-text-fill: black;
+    -fx-background-color: -fx-secondaryBgColor;
+    -fx-border-color: -fx-primaryBorderColor;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
 }
 
 .back-btn {
     -fx-min-width: 140px;
     -fx-min-height: 50px;
-    -fx-text-fill: black;
-    -fx-background-color: #FFF8E1;
-    -fx-border-radius: 4;
-    -fx-cursor: hand;
     -fx-font-size: 110%;
     -fx-font-weight: bold;
 }
 
-.back-btn:hover {
-    -fx-background-color: #BFB9A4;
-}
+/*.back-btn:hover {
+    -fx-background-radius: 5;
+}*/
 
 /* Main menu */
 .main-background {
-    -fx-background-image: url("../main/resources/background.png");
+    -fx-background-image: url("../main/resources/images/background.png");
 }
 
 .menu-btn {
     -fx-min-width: 300px;
     -fx-text-fill: black;
-    -fx-background-color: #FFF8E1;
-    -fx-border-radius: 4;
-    -fx-cursor: hand;
     -fx-font-size: 200%;
     -fx-font-weight: bold;
 }
 
-.menu-btn:hover {
-    -fx-background-color: #BFB9A4;
+.menu-btn:hover, .back-btn:hover {
+    -fx-background-color: -fx-primaryHoverColor;
+    -fx-border-color: transparent;
 }
 
 /* Rules */
 .rules-background {
-    -fx-background-image: url("../main/resources/rules_background.png");
+    -fx-background-image: url("../main/resources/images/rules_background.png");
     -fx-background-size: stretch;
 }
 
@@ -54,7 +67,7 @@
 
 /* Join */
 .join-background {
-    -fx-background-image: url("../main/resources/join_background.png");
+    -fx-background-image: url("../main/resources/images/join_background.png");
     -fx-background-size: stretch;
 }
 
@@ -63,4 +76,37 @@
     -fx-font-size: 36px;
 }
 
+/* Popup */
+.popup-background {
+    -fx-background-color: #FFF8E1;
+    -fx-border-radius: 10;
+    -fx-border-width: 4;
+    -fx-border-color: black;
+    -fx-background-radius: 10;
+}
+
+.popup-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+}
+
+.popup-message {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.popup-btn {
+    -fx-min-width: 60;
+    -fx-min-height: 40;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-color: #EFDEC6;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #DACBA8;
+}
+
+.popup-btn:hover {
+    -fx-background-color: #C6B8A5;
+}
 /* Game */

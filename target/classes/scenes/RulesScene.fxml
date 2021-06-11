@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="rules-background" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.RulesView">
+    <children>
+        <ImageView fitHeight="94.0" fitWidth="430.0" layoutX="503.0" layoutY="596.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../main/resources/images/Monopoly.png" />
+            </image>
+        </ImageView>
+      <ScrollPane focusTraversable="false" layoutX="326.0" layoutY="179.0" prefHeight="350.0" prefWidth="748.0">
+         <content>
+            <VBox prefHeight="481.0" prefWidth="731.0">
+               <children>
+                  <Text layoutX="10.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-section" text="Game pieces" wrappingWidth="245.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="* A board" wrappingWidth="129.13671875" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="*Two dice" wrappingWidth="87.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="* Tokens for each player" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="* 32 houses and 12 Hotels" wrappingWidth="173.79556274414062" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="* 32 houses and 12 Hotels" wrappingWidth="185.9830722808838" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="* 16 Chance and 16 Community Chest cards" wrappingWidth="272.9830722808838" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="* 28 Title Deed cards for each property" wrappingWidth="358.9830722808838" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="* Money" wrappingWidth="245.0" />
+                  <Text layoutX="10.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" wrappingWidth="245.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-section" text="Object of the Game" wrappingWidth="245.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="Become the wealthiest player through buying, renting and selling of property and force other players into bankruptcy." wrappingWidth="272.9830722808838" />
+                  <Text layoutX="10.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" wrappingWidth="245.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-section" text="Game Play" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="Starting with the Banker, each player throws the dice. The player with the highest total starts the play." wrappingWidth="272.9830722808838" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="Then each player places his token on the corner marked &quot;GO&quot;, and throw the dice and move his the number of spaces indicated by the dice." wrappingWidth="272.98307228088373" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="The tokens remain on the spaces occupied and proceed from that point on the player's next turn." wrappingWidth="272.98307228088373" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="Two or more tokens may rest on the same space at the same time." wrappingWidth="272.98307228088373" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rule-text" text="If one or both dice roll off the board, or land on or lean against a card deck, the roll is invalid. Roll them again." wrappingWidth="337.20831298828125" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Label layoutX="536.0" layoutY="89.0" text="Game Rules">
+         <font>
+            <Font name="Corbel Bold" size="64.0" />
+         </font>
+      </Label>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="32.0" prefWidth="131.0" styleClass="back-btn" text="← Back to menu" />
+    </children>
+</AnchorPane>
