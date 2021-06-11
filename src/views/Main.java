@@ -21,7 +21,7 @@ public class Main extends Application {
         window.setScene(scene);
         window.setResizable(false);
         window.setTitle("Monopoly - IIPSENE Groep 15");
-        window.getIcons().add(new Image("main/resources/logo.png"));
+        window.getIcons().add(new Image("main/resources/images/logo.png"));
         window.show();
     }
 
