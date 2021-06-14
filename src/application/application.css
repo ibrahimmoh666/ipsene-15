@@ -82,6 +82,8 @@
 .rule-text {
     -fx-font-size: 120%;
 }
+.scrollpane{
+}
 
 /* Join */
 .token-inp {

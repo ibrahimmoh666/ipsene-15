@@ -46,14 +46,10 @@ public class MainView {
     }
 
     @FXML
-    public void navigateToJoin() {
-        JoinView joinView = new JoinView(this.window);
-    }
+    public void navigateToJoin() { JoinView joinView = new JoinView(this.window); }
 
     @FXML
-    public void navigateToRules() {
-
-    }
+    public void navigateToRules() { RulesView rulesView = new RulesView(this.window);}
 
     @FXML
     public void navigateToTest() {
