@@ -1,20 +1,22 @@
 package views;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class GameView {
+public class MainView {
     private Stage window;
 
     private final int windowWidth = 1400;
     private final int windowHeight = 800;
-    private final String windowTitle = "Game - IIPSENE Groep 15";
+    private final String windowTitle = "Monopoly - IIPSENE Groep 15";
+    private final Image windowIcon = new Image(getClass().getResource("/resources/images/logo.png").toExternalForm());
 
-    public GameView(Stage window) {
+    public MainView(Stage window) {
         this.window = window;
         showWindow();
     }
@@ -22,7 +24,7 @@ public class GameView {
     private void showWindow() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/resources/fxml/Game.fxml"));
+            loader.setLocation(getClass().getResource("/resources/fxml/Main.fxml"));
             loader.setController(this);
             AnchorPane root = loader.load();
 
@@ -31,6 +33,7 @@ public class GameView {
             window.setScene(scene);
             window.setResizable(false);
             window.setTitle(this.windowTitle);
+            window.getIcons().add(this.windowIcon);
             window.show();
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -38,7 +41,27 @@ public class GameView {
     }
 
     @FXML
-    public void navigateToMain(ActionEvent event) {
-        MainView mainView = new MainView(this.window);
+    public void navigateToCreate() {
+        CreateView createView = new CreateView(this.window);
+    }
+
+    @FXML
+    public void navigateToJoin() {
+        JoinView joinView = new JoinView(this.window);
+    }
+
+    @FXML
+    public void navigateToRules() {
+
+    }
+
+    @FXML
+    public void navigateToTest() {
+        GameView gameView = new GameView(this.window);
+    }
+
+    @FXML
+    public void exitApplication() {
+        Platform.exit();
     }
 }

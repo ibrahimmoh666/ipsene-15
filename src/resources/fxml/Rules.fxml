@@ -14,7 +14,7 @@
     <children>
         <ImageView fitHeight="94.0" fitWidth="430.0" layoutX="503.0" layoutY="596.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../main/resources/images/Monopoly.png" />
+                <Image url="@../images/Monopoly.png" />
             </image>
         </ImageView>
       <ScrollPane focusTraversable="false" layoutX="326.0" layoutY="179.0" prefHeight="350.0" prefWidth="748.0">

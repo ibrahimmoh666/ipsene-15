@@ -1,6 +1,10 @@
 /* Fonts */
 @font-face {
-    src: url("../main/resources/fonts/BerkshireSwash-Regular.ttf") format("truetype");
+    src: url("../resources/fonts/BerkshireSwash-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    src: url("../resources/fonts/Alegreya.ttf") format("truetype");
 }
 
 /* Global */
@@ -9,10 +13,38 @@
     -fx-secondaryBgColor: #EFDEC6;
     -fx-primaryBorderColor: #DACBA8;
     -fx-primaryHoverColor: #C6B8A5;
-    -fx-font-family: "Berkshire Swash", Corbel, sans-serif;
+
+    -fx-monopolyBrown: #AC663E;
+    -fx-monopolyLightBlue: #ADD8E6;
+    -fx-monopolyPink: #E61F93;
+    -fx-monopolyOrange: #FFA500;
+    -fx-monopolyRed: #FF0000;
+    -fx-monopolyYellow: #FFFF00;
+    -fx-monopolyGreen: #43B14B;
+    -fx-monopolyDarkBlue: #145DA0;
+
+    -fx-font-family: "Berkshire Swash", Arial, Helvetica, sans-serif;
 }
 
-.menu-btn, .back-btn {
+.first-bg {
+    -fx-background-image: url("../resources/images/background.png");
+    -fx-background-size: stretch;
+}
+
+.second-bg {
+    -fx-background-image: url("../resources/images/background2.png");
+    -fx-background-size: stretch;
+}
+
+.overlay-bg {
+    -fx-background-color: -fx-primaryBgColor;
+    -fx-border-radius: 10;
+    -fx-border-width: 4;
+    -fx-border-color: black;
+    -fx-background-radius: 10;
+}
+
+.menu-btn, .standard-btn {
     -fx-text-fill: black;
     -fx-background-color: -fx-secondaryBgColor;
     -fx-border-color: -fx-primaryBorderColor;
@@ -22,22 +54,13 @@
     -fx-cursor: hand;
 }
 
-.back-btn {
+.standard-btn {
     -fx-min-width: 140px;
     -fx-min-height: 50px;
-    -fx-font-size: 110%;
     -fx-font-weight: bold;
 }
 
-/*.back-btn:hover {
-    -fx-background-radius: 5;
-}*/
-
 /* Main menu */
-.main-background {
-    -fx-background-image: url("../main/resources/images/background.png");
-}
-
 .menu-btn {
     -fx-min-width: 300px;
     -fx-text-fill: black;
@@ -45,17 +68,12 @@
     -fx-font-weight: bold;
 }
 
-.menu-btn:hover, .back-btn:hover {
+.menu-btn:hover, .standard-btn:hover {
     -fx-background-color: -fx-primaryHoverColor;
     -fx-border-color: transparent;
 }
 
 /* Rules */
-.rules-background {
-    -fx-background-image: url("../main/resources/images/rules_background.png");
-    -fx-background-size: stretch;
-}
-
 .rule-section {
     -fx-font-size: 200%;
     -fx-font-weight: bold;
@@ -66,25 +84,22 @@
 }
 
 /* Join */
-.join-background {
-    -fx-background-image: url("../main/resources/images/join_background.png");
-    -fx-background-size: stretch;
-}
-
-.token-input {
+.token-inp {
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: black;
+    -fx-background-color: -fx-secondaryBgColor;
+    -fx-border-color: black;
+    -fx-border-width: 4;
     -fx-font-weight: bold;
     -fx-font-size: 36px;
+    -fx-font-family: Alegreya, Arial, Helvetica, sans-serif;
+}
+
+.token-inp:focused {
+    -fx-prompt-text-fill: transparent;
 }
 
 /* Popup */
-.popup-background {
-    -fx-background-color: #FFF8E1;
-    -fx-border-radius: 10;
-    -fx-border-width: 4;
-    -fx-border-color: black;
-    -fx-background-radius: 10;
-}
-
 .popup-title {
     -fx-font-weight: bold;
     -fx-font-size: 30px;

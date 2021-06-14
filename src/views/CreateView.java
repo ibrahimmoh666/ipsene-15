@@ -1,20 +1,31 @@
 package views;
 
-import javafx.event.ActionEvent;
+import controllers.RoomController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class GameView {
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+
+public class CreateView {
     private Stage window;
 
     private final int windowWidth = 1400;
     private final int windowHeight = 800;
-    private final String windowTitle = "Game - IIPSENE Groep 15";
+    private final String windowTitle = "Create Room - IIPSENE Groep 15";
 
-    public GameView(Stage window) {
+    private RoomController roomController = new RoomController();
+
+    @FXML
+    private TextField tokenTextField;
+
+    public CreateView(Stage window) {
         this.window = window;
         showWindow();
     }
@@ -22,7 +33,7 @@ public class GameView {
     private void showWindow() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/resources/fxml/Game.fxml"));
+            loader.setLocation(getClass().getResource("/resources/fxml/Create.fxml"));
             loader.setController(this);
             AnchorPane root = loader.load();
 
@@ -31,6 +42,7 @@ public class GameView {
             window.setScene(scene);
             window.setResizable(false);
             window.setTitle(this.windowTitle);
+            this.tokenTextField.setText(roomController.getToken());
             window.show();
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -38,7 +50,14 @@ public class GameView {
     }
 
     @FXML
-    public void navigateToMain(ActionEvent event) {
+    public void navigateToMain() {
         MainView mainView = new MainView(this.window);
+    }
+
+    @FXML
+    public void copyTokenToClipboard() {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable transferable = new StringSelection(tokenTextField.getText());
+        clipboard.setContents(transferable, null);
     }
 }
