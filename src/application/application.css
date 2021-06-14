@@ -83,6 +83,7 @@
     -fx-font-size: 120%;
 }
 .scrollpane{
+    -fx-background-color:transparent;
 }
 
 /* Join */

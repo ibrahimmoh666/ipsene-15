@@ -1,6 +1,7 @@
 package views;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -44,7 +45,10 @@ public class RulesView {
             ex.printStackTrace();
         }
     }
-}
+
+    @FXML
+    public void navigateToMain(ActionEvent event) { MainView mainView = new MainView(this.window); }
+    }
 
 
 
