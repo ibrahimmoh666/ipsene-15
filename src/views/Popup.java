@@ -1,19 +1,21 @@
 package views;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class Popup {
-    private String title;
-    private String message;
-
-    @FXML
-    private AnchorPane currentPane;
+    private AnchorPane pane;
+    private VBox popupBox;
 
     @FXML
     private Label popupTitle;
@@ -22,53 +24,59 @@ public class Popup {
     private Label popupMessage;
 
     @FXML
-    private Button popupButton;
+    private HBox popupImages;
 
-    private VBox popupBox = new VBox();
-
-    public Popup(AnchorPane gamePane, String title, String message) {
-        this.title = title;
-        this.message = message;
-        this.currentPane = gamePane;
-        createPopupElements();
+    public Popup(AnchorPane pane) {
+        this.pane = pane;
+        createOverlay();
     }
 
-    private void createPopupElements() {
-        popupBox.setPrefSize(600, 400);
-        popupBox.setPadding(new Insets(40));
-        popupBox.setSpacing(20);
-        popupBox.setAlignment(Pos.CENTER);
-        popupBox.setLayoutX(400);
-        popupBox.setLayoutY(200);
-        popupBox.setVisible(false);
-        popupBox.getStyleClass().add("popup-background");
+    private void createOverlay() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/resources/fxml/Popup.fxml"));
+            loader.setController(this);
+            this.popupBox = loader.load();
+            hide();
+            this.pane.getChildren().add(popupBox);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
-        Label titleLabel = new Label(this.title);
-        titleLabel.getStyleClass().add("popup-title");
-
-        Label messageLabel = new Label(this.message);
-        messageLabel.getStyleClass().add("popup-message");
-
-        Button closePopupBtn = new Button("OK");
-        closePopupBtn.getStyleClass().add("popup-btn");
-        closePopupBtn.setOnAction(e -> {
-            destroy();
-        });
-
-        popupBox.getChildren().addAll(titleLabel, messageLabel, closePopupBtn);
-        currentPane.getChildren().add(popupBox);
+    public boolean isVisible() {
+        return this.popupBox.isVisible();
     }
 
     public void show() {
-        popupBox.setVisible(true);
-    }
-
-    public void hide() {
-        popupBox.setVisible(false);
+        this.popupBox.setVisible(true);
     }
 
     @FXML
-    public void destroy() {
-        currentPane.getChildren().remove(popupBox);
+    public void hide() {
+        this.popupBox.setVisible(false);
+    }
+
+    public void setTitle(String text) {
+        this.popupTitle.setText(text);
+    }
+
+    public void setMessage(String text) {
+        this.popupMessage.setText(text);
+    }
+
+    public void addImage(Image img) {
+        ImageView iv = new ImageView(img);
+        iv.setFitWidth(150);
+        iv.setFitHeight(150);
+        this.popupImages.getChildren().add(iv);
+    }
+
+    public void removeImages() {
+        this.popupImages.getChildren().removeAll();
+    }
+
+    public void remove() {
+        this.pane.getChildren().remove(this.popupBox);
     }
 }

@@ -1,22 +1,27 @@
 package views;
 
-import javafx.application.Platform;
+import com.sun.javafx.scene.control.InputField;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class MainView {
+public class LobbyView {
     private Stage window;
 
     private final int windowWidth = 1400;
     private final int windowHeight = 800;
-    private final String windowTitle = "Monopoly - IIPSENE Groep 15";
-    private final Image windowIcon = new Image(getClass().getResource("/resources/images/logo.png").toExternalForm());
+    private final String windowTitle = "Lobby - IIPSENE Groep 15";
 
-    public MainView(Stage window) {
+    @FXML
+    private Button readyButton;
+
+    public LobbyView(Stage window) {
         this.window = window;
         showWindow();
     }
@@ -24,7 +29,7 @@ public class MainView {
     private void showWindow() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/resources/fxml/Main.fxml"));
+            loader.setLocation(getClass().getResource("/resources/fxml/Lobby.fxml"));
             loader.setController(this);
             AnchorPane root = loader.load();
 
@@ -33,7 +38,6 @@ public class MainView {
             window.setScene(scene);
             window.setResizable(false);
             window.setTitle(this.windowTitle);
-            window.getIcons().add(this.windowIcon);
             window.show();
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -41,27 +45,8 @@ public class MainView {
     }
 
     @FXML
-    public void navigateToCreate() {
-        CreateView createView = new CreateView(this.window);
-    }
-
-    @FXML
-    public void navigateToJoin() {
-        JoinView joinView = new JoinView(this.window);
-    }
-
-    @FXML
-    public void navigateToRules() {
-        // TO-DO: Implement Ibrahim's view
-    }
-
-    @FXML
-    public void navigateToTest() {
-        GameView gameView = new GameView(this.window);
-    }
-
-    @FXML
-    public void exitApplication() {
-        Platform.exit();
+    public void clickedReady() {
+        readyButton.setDisable(true);
+        System.out.println("Player is ready!");
     }
 }
