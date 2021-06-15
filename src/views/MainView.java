@@ -58,7 +58,7 @@ public class MainView {
 
     @FXML
     public void navigateToRules() {
-
+        // TO-DO: Implement Ibrahim's view
     }
 
     @FXML
