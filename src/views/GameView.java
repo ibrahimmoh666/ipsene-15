@@ -1,13 +1,11 @@
 package views;
 
 import controllers.SceneController;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.Speler;
 import services.firebaseService;
@@ -17,25 +15,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+public class GameView {
+    private Stage window;
 
-public class GameView extends Application {
-    private SceneController sceneController = new SceneController();
+    private final int windowWidth = 1400;
+    private final int windowHeight = 800;
+    private final String windowTitle = "Game - IIPSENE Groep 15";
 
-    @FXML
-    private Label playerName;
-    private Label playerMoney;
-
-    @FXML
-    public void goToMainMenu(ActionEvent event) {
-        sceneController.switchScene(event, "MainScene");
+    public GameView(Stage window) {
+        this.window = window;
+        showWindow();
     }
 
-    public GameView() {
-        addUsertoBoard();
-    }
+    private void showWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/resources/fxml/Game.fxml"));
+            loader.setController(this);
+            AnchorPane root = loader.load();
 
-    @Override
-    public void start(Stage stage) throws Exception {
+            Scene scene = new Scene(root, this.windowWidth, this.windowHeight);
+            scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+            window.setScene(scene);
+            window.setResizable(false);
+            window.setTitle(this.windowTitle);
+            window.show();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -73,10 +80,7 @@ public class GameView extends Application {
             this.playerMoney.setText(entry.getKey());
         }
 
+    public void navigateToMain(ActionEvent event) {
+        MainView mainView = new MainView(this.window);
     }
-
-    public static void main(String[] args) {
-
-    }
-
 }

@@ -1,32 +1,35 @@
 package views;
 
-import controllers.SceneController;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class Popup {
     private String title;
     private String message;
 
     @FXML
-    private AnchorPane gamePane;
+    private AnchorPane currentPane;
+
+    @FXML
+    private Label popupTitle;
+
+    @FXML
+    private Label popupMessage;
+
+    @FXML
+    private Button popupButton;
 
     private VBox popupBox = new VBox();
 
     public Popup(AnchorPane gamePane, String title, String message) {
         this.title = title;
         this.message = message;
-        this.gamePane = gamePane;
+        this.currentPane = gamePane;
         createPopupElements();
     }
 
@@ -34,7 +37,10 @@ public class Popup {
         popupBox.setPrefSize(600, 400);
         popupBox.setPadding(new Insets(40));
         popupBox.setSpacing(20);
-        popupBox.setAlignment(Pos.TOP_CENTER);
+        popupBox.setAlignment(Pos.CENTER);
+        popupBox.setLayoutX(400);
+        popupBox.setLayoutY(200);
+        popupBox.setVisible(false);
         popupBox.getStyleClass().add("popup-background");
 
         Label titleLabel = new Label(this.title);
@@ -50,13 +56,19 @@ public class Popup {
         });
 
         popupBox.getChildren().addAll(titleLabel, messageLabel, closePopupBtn);
+        currentPane.getChildren().add(popupBox);
     }
 
     public void show() {
-        gamePane.getChildren().add(popupBox);
+        popupBox.setVisible(true);
     }
 
+    public void hide() {
+        popupBox.setVisible(false);
+    }
+
+    @FXML
     public void destroy() {
-        gamePane.getChildren().remove(popupBox);
+        currentPane.getChildren().remove(popupBox);
     }
 }
