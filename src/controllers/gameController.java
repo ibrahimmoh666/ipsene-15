@@ -16,11 +16,11 @@ import java.util.Timer;
 
 public class gameController {
 
-    private Speler user;
+    public String token;
 
-    public gameController() {
+    public gameController(String token) {
+        this.token = token;
     }
-
 
     public void start(Stage stage) throws Exception {
         System.out.println("Start gameController");

@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainView {
     private Stage window;
 
@@ -42,7 +44,11 @@ public class MainView {
 
     @FXML
     public void navigateToCreate() {
-        CreateView createView = new CreateView(this.window);
+        try {
+            CreateView createView = new CreateView(this.window);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -57,7 +63,7 @@ public class MainView {
 
     @FXML
     public void navigateToTest() {
-        GameView gameView = new GameView(this.window, "testPhaseUsername");
+        GameView gameView = new GameView(this.window);
     }
 
     @FXML

@@ -7,9 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import services.firebaseService;
+import services.manageData;
 
-import javax.naming.Name;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -23,14 +22,14 @@ public class CreateView {
     private final int windowHeight = 800;
     private final String windowTitle = "Create Room - IIPSENE Groep 15";
     public String token;
-//    private final firebaseService fs;
+    private final manageData cd = manageData.getInstance();
 
     private RoomController roomController = new RoomController();
 
     @FXML
     private TextField tokenTextField;
 
-    public CreateView(Stage window) {
+    public CreateView(Stage window) throws IOException {
         this.window = window;
         showWindow();
     }
@@ -62,9 +61,8 @@ public class CreateView {
     }
 
     @FXML
-    public void navigateToName() {
-
-//        fs.createRoom(this.token);
+    public void navigateToJoin() throws Exception {
+        cd.createRoom(this.token);
 
         System.out.println("Token sent to joinview:  "+ this.token);
         JoinView joinView = new JoinView(this.window, this.token);

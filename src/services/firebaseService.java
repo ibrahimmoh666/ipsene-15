@@ -17,7 +17,8 @@ import java.util.*;
 public class firebaseService {
 
     private Firestore db;
-    private static int playerCount = 0;
+    public String token;
+    static firebaseService firebaseService;
 
     public firebaseService() throws IOException {
         FileInputStream serviceAccount =
@@ -34,88 +35,14 @@ public class firebaseService {
         this.db = db;
     }
 
-    /**
-     * Adds a user to the firestore with username and token
-     * @param name
-     * @param token
-     * @throws Exception
-     */
-    public void addUser(String name, String token) throws Exception {
-        DocumentReference docRef = db.collection("spelers").document(name);
-        Map<String, Object> data = new HashMap<>();
-        data.put("name", name);
-        data.put("color", "kleur");
-        data.put("money", 1500);
-        data.put("position", 0);
-        data.put("number", playerCount);
-        data.put("token", token);
-        ApiFuture<WriteResult> result = docRef.set(data);
-        System.out.println("Added user to game : " + result.get().getUpdateTime());
-        playerCount++;
-    }
-
-
-    /**
-     * Get the users information in an arraylist
-     * @throws Exception
-     * @return Speler class obj     Speler informatie als een speler object class
-     */
-    public ArrayList<Speler> getUsers() throws Exception{
-        ApiFuture<QuerySnapshot> future =
-                db.collection("spelers").get();
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-        ArrayList<Speler> spelers = new ArrayList<Speler>();
-        for (DocumentSnapshot document : documents) {
-            System.out.println(document);
-            if(document.exists()){
-                spelers.add(document.toObject(Speler.class));
-            }
+    public static firebaseService getInstance() throws IOException {
+        if (firebaseService == null){
+            firebaseService = new firebaseService();
         }
-        return spelers;
+        return firebaseService;
     }
 
-    /**
-     * Gives property to an player
-     * @param propertyId
-     * @param userName
-     * @throws Exception
-     */
-    public void givePropertyToUser(Integer propertyId, String userName) throws Exception{
-        DocumentReference docRef = db.collection("bord").document("propertyList");
-        Map<String, Object> data = new HashMap<>();
-        data.put("test", propertyId);
-        ApiFuture<WriteResult> result = docRef.set(data);
-        System.out.println("Update time : " + result.get().getUpdateTime());
-    }
-
-    /**
-     * Takes an amount of money from a users account
-     * @param name
-     * @param amount
-     * @throws Exception
-     */
-    public void manageUserFunds(String name, int amount) throws Exception{
-        ApiFuture<Void> futureTransaction = db.runTransaction(transaction -> {
-            DocumentReference docRef = db.collection("spel").document("spelers");
-            DocumentSnapshot snapshot = transaction.get(docRef).get();
-
-            long oldValue = snapshot.getLong("money");
-            transaction.update(docRef, "money", oldValue += amount);
-            System.out.println("Exchanged "+ amount +"$ from '"+ name +"' wallet");
-            return null;
-        });
-    }
-
-
-    /**
-     *
-     * @param token
-     */
-    public void createRoom(String token) {
-        System.out.println("Function for creating lobby");
-    }
-
-    Firestore getDb() {
+    public Firestore getDb() {
         return db;
     }
 
@@ -128,9 +55,9 @@ public class firebaseService {
     }
 
     public static void main(String[] args) throws Exception {
-        firebaseService quickStart = new firebaseService();
-        quickStart.run();
-        quickStart.close();
+//        firebaseService quickStart = new firebaseService();
+//        quickStart.run();
+//        quickStart.close();
     }
 
 }

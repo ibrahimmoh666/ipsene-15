@@ -18,12 +18,12 @@
       </ImageView>
       <AnchorPane layoutX="343.0" layoutY="268.0" prefHeight="426.0" prefWidth="714.0" styleClass="overlay-bg">
          <children>
-            <TextField fx:id="tokenTextField" alignment="CENTER" focusTraversable="false" layoutX="113.0" layoutY="213.0" onAction="#tokenEntered" prefHeight="98.0" prefWidth="489.0" promptText="Enter token and press enter" styleClass="token-inp">
+            <TextField fx:id="tokenTextField" alignment="CENTER" focusTraversable="false" layoutX="114.0" layoutY="108.0" onAction="#tokenEntered" prefHeight="98.0" prefWidth="489.0" promptText="Enter token" styleClass="token-inp">
                <font>
                   <Font size="36.0" />
                </font>
             </TextField>
-            <Label layoutX="114.0" layoutY="46.0" text="Enter room token">
+            <Label layoutX="212.0" layoutY="14.0" text="Join Room">
                <font>
                   <Font name="Corbel Bold" size="64.0" />
                </font>
@@ -32,6 +32,16 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
+            <TextField fx:id="userNameTextField" alignment="CENTER" focusTraversable="false" layoutX="114.0" layoutY="236.0" onAction="#tokenEntered" prefHeight="98.0" prefWidth="489.0" promptText="Enter Name" styleClass="token-inp">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </TextField>
          </children></AnchorPane>
+      <Button layoutX="635.0" layoutY="669.0" mnemonicParsing="false" onAction="#joinRoom" prefHeight="51.0" prefWidth="131.0" style="-fx-font-size: 18;" styleClass="standard-btn" text="Join">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

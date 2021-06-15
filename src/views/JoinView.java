@@ -1,18 +1,23 @@
 package views;
 
-import com.sun.javafx.scene.control.InputField;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import models.Speler;
+import services.manageData;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class JoinView {
     private Stage window;
@@ -21,6 +26,7 @@ public class JoinView {
     private final int windowHeight = 800;
     private final String windowTitle = "Join Room - IIPSENE Groep 15";
     public String token;
+    public manageData cd = null;
 
     @FXML
     private Label stateMessage;
@@ -31,21 +37,22 @@ public class JoinView {
     @FXML
     private TextField userNameTextField;
 
-    public JoinView(Stage window, String token) {
+    public JoinView(Stage window, String token)  {
         this.window = window;
         showWindow();
         this.token = token;
         this.tokenTextField.setText(token);
-    }
-
-    public String getToken() {
-        return token;
+        try {
+            manageData.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showWindow() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/resources/fxml/Join2.fxml"));
+            loader.setLocation(getClass().getResource("/resources/fxml/Join.fxml"));
             loader.setController(this);
             AnchorPane root = loader.load();
 
@@ -80,10 +87,59 @@ public class JoinView {
     }
 
     @FXML
-    public void joinRoom(ActionEvent event) {
-        //Todo: Save user information to firebase
+    public void joinRoom(ActionEvent event) throws Exception {
+        if (cd == null) {
+            this.cd = manageData.getInstance();
+        }
+        cd.addUser(userNameTextField.getText(), tokenTextField.getText());
+        System.out.println(userNameTextField.getText());
         LobbyView lobbyView = new LobbyView(this.window);
+    }
 
+    public ArrayList<Speler> getUsers() throws Exception{
+        ApiFuture<QuerySnapshot> future =
+                cd.getDb().collection("spel").get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        ArrayList<Speler> spelers = new ArrayList<Speler>();
+        for (DocumentSnapshot document : documents) {
+            System.out.println(document);
+            if(document.exists()){
+                spelers.add(document.toObject(Speler.class));
+            }
+        }
+        return spelers;
+    }
+
+    /**
+     * Gives property to an player
+     * @param propertyId
+     * @param userName
+     * @throws Exception
+     */
+    public void givePropertyToUser(Integer propertyId, String userName) throws Exception{
+        DocumentReference docRef = cd.getDb().collection("bord").document("propertyList");
+        Map<String, Object> data = new HashMap<>();
+        data.put("test", propertyId);
+        ApiFuture<WriteResult> result = docRef.set(data);
+        System.out.println("Update time : " + result.get().getUpdateTime());
+    }
+
+    /**
+     * Takes an amount of money from a users account
+     * @param name
+     * @param amount
+     * @throws Exception
+     */
+    public void manageUserFunds(String name, int amount) throws Exception{
+        ApiFuture<Void> futureTransaction = cd.getDb().runTransaction(transaction -> {
+            DocumentReference docRef = cd.getDb().collection("spel").document("spelers");
+            DocumentSnapshot snapshot = transaction.get(docRef).get();
+
+            long oldValue = snapshot.getLong("money");
+            transaction.update(docRef, "money", oldValue += amount);
+            System.out.println("Exchanged "+ amount +"$ from '"+ name +"' wallet");
+            return null;
+        });
     }
 
 }

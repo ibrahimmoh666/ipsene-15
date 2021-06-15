@@ -16,7 +16,7 @@ public class GameView {
     private final String windowTitle = "Game - IIPSENE Groep 15";
     private String username = "a";
 
-    public GameView(Stage window, String username) {
+    public GameView(Stage window) {
         this.window = window;
         showWindow();
         this.username = username;

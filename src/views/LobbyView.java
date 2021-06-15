@@ -20,9 +20,6 @@ public class LobbyView {
     @FXML
     private Label stateMessage;
 
-    @FXML
-    private TextField tokenTextField;
-
     public LobbyView(Stage window) {
         this.window = window;
         showWindow();
@@ -46,6 +43,10 @@ public class LobbyView {
         }
     }
 
+    public void addUserstoLobby(){
+
+    }
+
     @FXML
     public void navigateToMain(ActionEvent event) {
         MainView mainView = new MainView(this.window);
@@ -53,7 +54,7 @@ public class LobbyView {
 
     @FXML
     public void readyUp(ActionEvent event) {
-        GameView gameView = new GameView(this.window, "usernameTest1");
+        GameView gameView = new GameView(this.window);
     }
 
 }
