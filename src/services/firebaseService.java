@@ -21,7 +21,7 @@ public class firebaseService {
 
     public firebaseService() throws IOException {
         FileInputStream serviceAccount =
-                new FileInputStream("res/ipsene15-monopoly-firebase-adminsdk-d6pd1-05c8da5b71.json");
+                new FileInputStream("src/resources/ipsene15-monopoly-firebase-adminsdk-d6pd1-05c8da5b71.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -48,10 +48,12 @@ public class firebaseService {
         data.put("money", 1500);
         data.put("position", 0);
         data.put("number", playerCount);
+        data.put("token", token);
         ApiFuture<WriteResult> result = docRef.set(data);
         System.out.println("Added user to game : " + result.get().getUpdateTime());
         playerCount++;
     }
+
 
     /**
      * Get the users information in an arraylist
@@ -102,6 +104,15 @@ public class firebaseService {
             System.out.println("Exchanged "+ amount +"$ from '"+ name +"' wallet");
             return null;
         });
+    }
+
+
+    /**
+     *
+     * @param token
+     */
+    public void createRoom(String token) {
+        System.out.println("Function for creating lobby");
     }
 
     Firestore getDb() {

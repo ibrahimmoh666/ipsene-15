@@ -20,6 +20,7 @@ public class JoinView {
     private final int windowWidth = 1400;
     private final int windowHeight = 800;
     private final String windowTitle = "Join Room - IIPSENE Groep 15";
+    public String token;
 
     @FXML
     private Label stateMessage;
@@ -27,15 +28,24 @@ public class JoinView {
     @FXML
     private TextField tokenTextField;
 
-    public JoinView(Stage window) {
+    @FXML
+    private TextField userNameTextField;
+
+    public JoinView(Stage window, String token) {
         this.window = window;
         showWindow();
+        this.token = token;
+        this.tokenTextField.setText(token);
+    }
+
+    public String getToken() {
+        return token;
     }
 
     private void showWindow() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/resources/fxml/Join.fxml"));
+            loader.setLocation(getClass().getResource("/resources/fxml/Join2.fxml"));
             loader.setController(this);
             AnchorPane root = loader.load();
 
@@ -68,4 +78,12 @@ public class JoinView {
             stateMessage.setText("");
         }
     }
+
+    @FXML
+    public void joinRoom(ActionEvent event) {
+        //Todo: Save user information to firebase
+        LobbyView lobbyView = new LobbyView(this.window);
+
+    }
+
 }

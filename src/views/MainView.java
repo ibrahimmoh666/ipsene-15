@@ -47,7 +47,7 @@ public class MainView {
 
     @FXML
     public void navigateToJoin() {
-        JoinView joinView = new JoinView(this.window);
+        JoinView joinView = new JoinView(this.window, "");
     }
 
     @FXML
@@ -57,7 +57,7 @@ public class MainView {
 
     @FXML
     public void navigateToTest() {
-        GameView gameView = new GameView(this.window);
+        GameView gameView = new GameView(this.window, "testPhaseUsername");
     }
 
     @FXML

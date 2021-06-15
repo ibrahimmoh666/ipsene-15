@@ -7,11 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import services.firebaseService;
 
+import javax.naming.Name;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
+import java.io.IOException;
 
 public class CreateView {
     private Stage window;
@@ -19,6 +22,8 @@ public class CreateView {
     private final int windowWidth = 1400;
     private final int windowHeight = 800;
     private final String windowTitle = "Create Room - IIPSENE Groep 15";
+    public String token;
+//    private final firebaseService fs;
 
     private RoomController roomController = new RoomController();
 
@@ -42,7 +47,9 @@ public class CreateView {
             window.setScene(scene);
             window.setResizable(false);
             window.setTitle(this.windowTitle);
-            this.tokenTextField.setText(roomController.getToken());
+            this.token = roomController.getToken();
+
+            this.tokenTextField.setText(this.token);
             window.show();
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -52,6 +59,15 @@ public class CreateView {
     @FXML
     public void navigateToMain() {
         MainView mainView = new MainView(this.window);
+    }
+
+    @FXML
+    public void navigateToName() {
+
+//        fs.createRoom(this.token);
+
+        System.out.println("Token sent to joinview:  "+ this.token);
+        JoinView joinView = new JoinView(this.window, this.token);
     }
 
     @FXML
