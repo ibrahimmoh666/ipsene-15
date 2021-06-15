@@ -2,6 +2,7 @@ package services;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import com.google.firebase.database.annotations.Nullable;
 import models.Speler;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class manageData extends firebaseService {
 
     private static int playerCount = 0;
     static manageData manageData;
+    public static String token;
 
     public static manageData getInstance() throws IOException {
         if (manageData == null){
@@ -30,8 +32,10 @@ public class manageData extends firebaseService {
     /**
      * Creates a new lobby with data inside
      * @param token
+     * @author Alavi van Oosterhout
      */
     public void createRoom(String token) throws Exception {
+        this.token = token;
         DocumentReference docRef = getDb().collection("spel").document(token);
         Map<String, Object> data = new HashMap<>();
         Map<String, Object> speler = new HashMap<>();
@@ -47,6 +51,7 @@ public class manageData extends firebaseService {
      * @param name
      * @param token
      * @throws Exception
+     * @author Alavi van Oosterhout
      */
     public void addUser(String name, String token) {
         DocumentReference docRef = getDb().collection("spel").document(token);
@@ -71,10 +76,32 @@ public class manageData extends firebaseService {
         playerCount++;
     }
 
+    public void Listen(String collection, String document){
+        DocumentReference docRef = getDb().collection(collection).document(document);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirestoreException e) {
+                if (e != null) {
+                    System.err.println("Listen failed: " + e);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    System.out.println("Current data: " + snapshot.getData());
+                } else {
+                    System.out.print("Current data: null");
+                }
+            }
+        });
+    }
+
+
     /**
      * Get the users information in an arraylist
      * @throws Exception
      * @return Speler class obj     Speler informatie als een speler object class
+     * @author Alavi van Oosterhout
      */
     public ArrayList<Speler> getUsers() throws Exception{
         ApiFuture<QuerySnapshot> future =
@@ -95,6 +122,7 @@ public class manageData extends firebaseService {
      * @param propertyId
      * @param userName
      * @throws Exception
+     * @author Alavi van Oosterhout
      */
     public void givePropertyToUser(Integer propertyId, String userName) throws Exception{
         DocumentReference docRef = getDb().collection("bord").document("propertyList");
@@ -109,6 +137,7 @@ public class manageData extends firebaseService {
      * @param name
      * @param amount
      * @throws Exception
+     * @author Alavi van Oosterhout
      */
     public void manageUserFunds(String name, int amount) throws Exception{
         ApiFuture<Void> futureTransaction = getDb().runTransaction(transaction -> {
@@ -122,4 +151,7 @@ public class manageData extends firebaseService {
         });
     }
 
+    public static String getToken() {
+        return token;
+    }
 }

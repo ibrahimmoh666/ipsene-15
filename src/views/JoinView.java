@@ -25,7 +25,6 @@ public class JoinView {
     private final int windowWidth = 1400;
     private final int windowHeight = 800;
     private final String windowTitle = "Join Room - IIPSENE Groep 15";
-    public String token;
     public manageData cd = null;
 
     @FXML
@@ -40,7 +39,7 @@ public class JoinView {
     public JoinView(Stage window, String token)  {
         this.window = window;
         showWindow();
-        this.token = token;
+        cd.token = token;
         this.tokenTextField.setText(token);
         try {
             manageData.getInstance();
@@ -92,54 +91,9 @@ public class JoinView {
             this.cd = manageData.getInstance();
         }
         cd.addUser(userNameTextField.getText(), tokenTextField.getText());
+        cd.token = tokenTextField.getText();
         System.out.println(userNameTextField.getText());
         LobbyView lobbyView = new LobbyView(this.window);
-    }
-
-    public ArrayList<Speler> getUsers() throws Exception{
-        ApiFuture<QuerySnapshot> future =
-                cd.getDb().collection("spel").get();
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-        ArrayList<Speler> spelers = new ArrayList<Speler>();
-        for (DocumentSnapshot document : documents) {
-            System.out.println(document);
-            if(document.exists()){
-                spelers.add(document.toObject(Speler.class));
-            }
-        }
-        return spelers;
-    }
-
-    /**
-     * Gives property to an player
-     * @param propertyId
-     * @param userName
-     * @throws Exception
-     */
-    public void givePropertyToUser(Integer propertyId, String userName) throws Exception{
-        DocumentReference docRef = cd.getDb().collection("bord").document("propertyList");
-        Map<String, Object> data = new HashMap<>();
-        data.put("test", propertyId);
-        ApiFuture<WriteResult> result = docRef.set(data);
-        System.out.println("Update time : " + result.get().getUpdateTime());
-    }
-
-    /**
-     * Takes an amount of money from a users account
-     * @param name
-     * @param amount
-     * @throws Exception
-     */
-    public void manageUserFunds(String name, int amount) throws Exception{
-        ApiFuture<Void> futureTransaction = cd.getDb().runTransaction(transaction -> {
-            DocumentReference docRef = cd.getDb().collection("spel").document("spelers");
-            DocumentSnapshot snapshot = transaction.get(docRef).get();
-
-            long oldValue = snapshot.getLong("money");
-            transaction.update(docRef, "money", oldValue += amount);
-            System.out.println("Exchanged "+ amount +"$ from '"+ name +"' wallet");
-            return null;
-        });
     }
 
 }

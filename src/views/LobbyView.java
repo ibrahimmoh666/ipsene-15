@@ -1,5 +1,6 @@
 package views;
 
+import controllers.RoomController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import services.manageData;
+
+import java.io.IOException;
 
 public class LobbyView {
 
@@ -16,13 +20,24 @@ public class LobbyView {
     private final int windowWidth = 1400;
     private final int windowHeight = 800;
     private final String windowTitle = "Lobby - IIPSENE Groep 15";
+    private RoomController roomController = new RoomController();
+    public manageData cd = null;
 
     @FXML
     private Label stateMessage;
 
+    @FXML
+    private Label tokenText;
+
     public LobbyView(Stage window) {
         this.window = window;
         showWindow();
+        roomController.updatePlayers();
+        try {
+            manageData.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showWindow() {
@@ -38,6 +53,7 @@ public class LobbyView {
             window.setResizable(false);
             window.setTitle(this.windowTitle);
             window.show();
+            tokenText.setText(cd.token);
         } catch(Exception ex) {
             ex.printStackTrace();
         }

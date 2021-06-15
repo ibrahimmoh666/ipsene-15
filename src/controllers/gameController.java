@@ -27,9 +27,6 @@ public class gameController {
     }
 
 
-    public void logtest(){
-        System.out.println("Logging test");
-    }
 
     public static void main(String[] args) {
     }
