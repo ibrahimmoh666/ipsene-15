@@ -1,6 +1,7 @@
 package services;
 
 import com.google.api.core.ApiFuture;
+import com.google.api.core.SettableApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.database.annotations.Nullable;
 import models.Speler;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class manageData extends firebaseService {
 
@@ -57,12 +59,13 @@ public class manageData extends firebaseService {
         DocumentReference docRef = getDb().collection("spel").document(token);
         Map<String, Object> data = new HashMap<>();
         Map<String, Object> speler = new HashMap<>();
+        speler.put("ready", 0);
         speler.put("name", name);
         speler.put("color", "kleur");
         speler.put("money", 1500);
         speler.put("position", 0);
         speler.put("token", token);
-        data.put("speler", speler);
+        data.put("spelers", speler);
 
         ApiFuture<WriteResult> result = docRef.set(data);
 
@@ -75,27 +78,6 @@ public class manageData extends firebaseService {
         }
         playerCount++;
     }
-
-    public void Listen(String collection, String document){
-        DocumentReference docRef = getDb().collection(collection).document(document);
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                @Nullable FirestoreException e) {
-                if (e != null) {
-                    System.err.println("Listen failed: " + e);
-                    return;
-                }
-
-                if (snapshot != null && snapshot.exists()) {
-                    System.out.println("Current data: " + snapshot.getData());
-                } else {
-                    System.out.print("Current data: null");
-                }
-            }
-        });
-    }
-
 
     /**
      * Get the users information in an arraylist
@@ -154,4 +136,36 @@ public class manageData extends firebaseService {
     public static String getToken() {
         return token;
     }
+
+    public List<String> listenForMultiple() throws Exception {
+        final SettableApiFuture<List<String>> future = SettableApiFuture.create();
+
+        getDb().collection("spel")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots,
+                                        @Nullable FirestoreException e) {
+                        if (e != null) {
+                            System.err.println("Listen failed:" + e);
+                            return;
+                        }
+
+                        List<String> spelers = new ArrayList<>();
+                        for (DocumentSnapshot doc : snapshots) {
+                            if (doc.get("ready") != null) {
+                                spelers.add(doc.getString("ready"));
+                            }
+                            System.out.println(doc.getData());
+                        }
+                        System.out.println("update ready: " + spelers);
+                        // [START_EXCLUDE silent]
+                        if (!future.isDone()) {
+                            future.set(spelers);
+                        }
+                    }
+                });
+
+        return future.get(5, TimeUnit.SECONDS);
+    }
+
 }

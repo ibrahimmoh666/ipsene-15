@@ -25,7 +25,11 @@ public class RoomController {
     }
 
     public void updatePlayers(){
-        cd.Listen("spel", getToken());
+        try {
+            cd.listenForMultiple();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getToken() {
