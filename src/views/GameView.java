@@ -7,7 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import models.BoardPositions;
+import models.Player;
 
 public class GameView {
     private Stage window;
@@ -18,6 +21,10 @@ public class GameView {
 
     @FXML
     private AnchorPane gamePane;
+
+    @FXML
+    private Circle playerOne;
+    private Player plr = new Player("John");
 
     public GameView(Stage window) {
         this.window = window;
@@ -62,8 +69,19 @@ public class GameView {
             total += rolledDice[i];
         }
 
+        plr.addStepsToPosition(total);
+        moveTest();
+
         p.setMessage("You've rolled a total of " + total);
         p.show();
+    }
+
+    @FXML
+    public void moveTest() {
+        BoardPositions bp = new BoardPositions();
+        int[] layout = bp.getLayoutFromBoxNumber(plr.getPosition(), 2);
+        playerOne.setLayoutX(layout[0]);
+        playerOne.setLayoutY(layout[1]);
     }
 
     @FXML

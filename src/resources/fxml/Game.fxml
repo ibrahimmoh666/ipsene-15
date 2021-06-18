@@ -14,10 +14,6 @@
          </image>
       </ImageView>
       <Button layoutX="1326.0" layoutY="14.0" mnemonicParsing="false" onAction="#navigateToMain" text="Go back" />
-      <Circle id="player0" fill="DODGERBLUE" layoutX="38.0" layoutY="719.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle id="player1" fill="#ff1f1f" layoutX="76.0" layoutY="719.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle id="player2" fill="#07ff49" layoutX="38.0" layoutY="762.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle id="player3" fill="#ff00c8" layoutX="76.0" layoutY="762.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
       <Button layoutX="1225.0" layoutY="14.0" mnemonicParsing="false" onAction="#showPopup" text="Show popup" />
       <AnchorPane layoutX="344.0" layoutY="422.0" minHeight="150.0" prefHeight="206.0" prefWidth="177.0">
          <children>
@@ -33,5 +29,10 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Circle fx:id="playerOne" fill="DODGERBLUE" layoutX="713.0" layoutY="741.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button layoutX="1309.0" layoutY="50.0" mnemonicParsing="false" onAction="#moveTest" text="Move Test" />
+      <Circle fill="#ff1f1f" layoutX="776.0" layoutY="741.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#1fff37" layoutX="743.0" layoutY="773.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#6a1fff" layoutX="776.0" layoutY="773.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
